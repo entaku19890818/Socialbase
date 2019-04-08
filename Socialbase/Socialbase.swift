@@ -61,6 +61,8 @@ public extension RequestProtocol {
         if let ofID: String = ofID {
             self.of.set(Subject(id: ofID, value: [:]))
         }
+        let batch: WriteBatch = Firestore.firestore().batch()
+        self.pack(.update, batch: batch)
     }
 
     public func cancel(_ block: ((Error?) -> Void)? = nil) {
